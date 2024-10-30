@@ -37,13 +37,6 @@ let package = Package(
         .product(name: "SwiftSyntaxWrapper", package: "swift-syntax-xcframeworks"),
       ]
     ),
-    .testTarget(
-      name: "PerceptionMacrosTests",
-      dependencies: [
-        "PerceptionMacros",
-        .product(name: "SwiftSyntaxWrapper", package: "swift-syntax-xcframeworks"),
-      ]
-    ),
   ]
 )
 
