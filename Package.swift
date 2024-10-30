@@ -15,8 +15,7 @@ let package = Package(
     .library(name: "Perception", targets: ["Perception"])
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-macro-testing", from: "0.1.0"),
-    .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"601.0.0-prerelease"),
+    .package(url: "https://github.com/openium/swift-syntax-xcframeworks.git", from: "600.0.1"),
     .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.2.2"),
   ],
   targets: [
@@ -35,15 +34,7 @@ let package = Package(
     .macro(
       name: "PerceptionMacros",
       dependencies: [
-        .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
-        .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
-      ]
-    ),
-    .testTarget(
-      name: "PerceptionMacrosTests",
-      dependencies: [
-        "PerceptionMacros",
-        .product(name: "MacroTesting", package: "swift-macro-testing"),
+        .product(name: "SwiftSyntaxWrapper", package: "swift-syntax-xcframeworks"),
       ]
     ),
   ]

@@ -1,4 +1,4 @@
-PLATFORM_IOS = iOS Simulator,id=$(call udid_for,iOS 17.2,iPhone \d\+ Pro [^M])
+PLATFORM_IOS = iOS Simulator,id=$(call udid_for,iOS 18.1,iPhone \d\+ Pro [^M])
 
 test-compatibility:
 	xcodebuild \
