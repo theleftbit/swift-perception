@@ -214,7 +214,6 @@ public func withPerceptionTracking<T>(
       return withObservationTracking(apply, onChange: onChange())
     }
   #endif
-
   let (result, accessList) = generateAccessList(apply)
   if let accessList {
     PerceptionTracking._installTracking(accessList, onChange: onChange())

@@ -12,17 +12,24 @@ let package = Package(
     .watchOS(.v6),
   ],
   products: [
-    .library(name: "Perception", targets: ["Perception"])
+    .library(name: "Perception", targets: ["Perception"]),
+    .library(name: "PerceptionCore", targets: ["PerceptionCore"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/openium/swift-syntax-xcframeworks.git", from: "600.0.1"),
+    .package(url: "https://github.com/theleftbit/swift-syntax-xcframeworks.git", from: "600.0.1"),
     .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.2.2"),
   ],
   targets: [
     .target(
       name: "Perception",
       dependencies: [
+        "PerceptionCore",
         "PerceptionMacros",
+      ]
+    ),
+    .target(
+      name: "PerceptionCore",
+      dependencies: [
         .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
       ]
     ),

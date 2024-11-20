@@ -22,7 +22,7 @@ public struct PerceptionRegistrar: Sendable {
   /// ``PerceptionRegistrar`` when using the
   /// ``Perception/Perceptible()`` macro to indicate observably
   /// of a type.
-  public init(isPerceptionCheckingEnabled: Bool = Perception.isPerceptionCheckingEnabled) {
+  public init(isPerceptionCheckingEnabled: Bool = PerceptionCore.isPerceptionCheckingEnabled) {
     if #available(iOS 17, macOS 14, tvOS 17, watchOS 10, *), !isObservationBeta {
       #if canImport(Observation)
         self._rawValue = AnySendable(ObservationRegistrar())
@@ -53,7 +53,12 @@ public struct PerceptionRegistrar: Sendable {
   @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
   extension PerceptionRegistrar {
     public func access<Subject: Observable, Member>(
-      _ subject: Subject, keyPath: KeyPath<Subject, Member>
+      _ subject: Subject,
+      keyPath: KeyPath<Subject, Member>,
+      fileID: StaticString = #fileID,
+      filePath: StaticString = #filePath,
+      line: UInt = #line,
+      column: UInt = #column
     ) {
       self.registrar.access(subject, keyPath: keyPath)
     }
@@ -210,7 +215,7 @@ extension PerceptionRegistrar: Hashable {
       column: UInt
     ) {
       if self.isPerceptionCheckingEnabled,
-        Perception.isPerceptionCheckingEnabled,
+        PerceptionCore.isPerceptionCheckingEnabled,
         !_PerceptionLocals.isInPerceptionTracking,
         !_PerceptionLocals.skipPerceptionChecking,
         self.isInSwiftUIBody(file: filePath, line: line)
